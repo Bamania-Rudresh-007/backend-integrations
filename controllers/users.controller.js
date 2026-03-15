@@ -1,10 +1,15 @@
-import express from "express";
-import mongoose from "mongoose";
+import bcryp from "bcrypt";
 import User from "../models/user.model.js";
 
 const createUser = async (req, res) => {
     try {
-        const newUser = await User.create(req.body);
+        const {name , age} = req.body
+        const encryptedAge = await bcryp.hash(age, 10)
+
+        const newUser = await User.create({
+            name,
+            age: encryptedAge,            
+        });
 
         res.json({
             message: "User created successfully",
@@ -55,7 +60,7 @@ const updateUserById = async (req, res) => {
         const updatedUser = await User.findByIdAndUpdate(
             req.params.id,
             req.body,
-            { new: true },
+            { returnDocument: "after", runValidators: true  },
         );
 
         res.json({
