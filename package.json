@@ -1,0 +1,26 @@
+{
+  "name": "backend-integration",
+  "version": "1.0.0",
+  "description": "implementing all http methods connecting with mongodb database maintaining folder structure and encrypting password through bcrypt.hash ",
+  "homepage": "https://github.com/Bamania-Rudresh-007/backend-integrations#readme",
+  "bugs": {
+    "url": "https://github.com/Bamania-Rudresh-007/backend-integrations/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bamania-Rudresh-007/backend-integrations.git"
+  },
+  "license": "ISC",
+  "author": "Bamania Rudresh Vinaychandra",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "mongoose": "^9.3.0"
+  }
+}
