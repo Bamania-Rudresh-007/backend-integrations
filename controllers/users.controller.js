@@ -3,12 +3,13 @@ import User from "../models/user.model.js";
 
 const createUser = async (req, res) => {
     try {
-        const {name , age} = req.body
-        const encryptedAge = await bcryp.hash(age, 10)
+        const {name , email, password} = req.body;
+        const encryptedPassword = await bcryp.hash(password, 10)
 
         const newUser = await User.create({
             name,
-            age: encryptedAge,            
+            email,
+            password: encryptedPassword,
         });
 
         res.json({
