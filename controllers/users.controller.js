@@ -1,21 +1,15 @@
-import bcryp from "bcrypt";
-import User from "../models/user.model.js";
+import Data from "../models/data.model.js";
 
 const createUser = async (req, res) => {
     try {
-        const {name , email, password} = req.body;
-        const encryptedPassword = await bcryp.hash(password, 10)
-
-        const newUser = await User.create({
-            name,
-            email,
-            password: encryptedPassword,
-        });
+        // console.log(req.body)
+        const newUser = await Data.create(req.body);
 
         res.json({
             message: "User created successfully",
             data: newUser,
         });
+        
     } catch (error) {
         res.status(500).json({
             message: "Failed creating new user",
@@ -26,7 +20,7 @@ const createUser = async (req, res) => {
 
 const readUsers = async (req, res) => {
     try {
-        const allUsers = await User.find();
+        const allUsers = await Data.find();
 
         res.json({
             message: "All user fetched successfully!!",
@@ -42,7 +36,7 @@ const readUsers = async (req, res) => {
 
 const readUserById = async (req, res) => {
     try {
-        const user = await User.findById(req.params.id);
+        const user = await Data.findById(req.params.id);
 
         res.json({
             message: "user data fetched successfully!!",
@@ -58,7 +52,7 @@ const readUserById = async (req, res) => {
 
 const updateUserById = async (req, res) => {
     try {
-        const updatedUser = await User.findByIdAndUpdate(
+        const updatedUser = await Data.findByIdAndUpdate(
             req.params.id,
             req.body,
             { returnDocument: "after", runValidators: true  },
@@ -78,7 +72,7 @@ const updateUserById = async (req, res) => {
 
 const delteUserById = async (req, res) => {
     try {
-        const deletedUser = await User.findByIdAndDelete(req.params.id);
+        const deletedUser = await Data.findByIdAndDelete(req.params.id);
 
         res.json({
             message: "User deleted successfully!!",
