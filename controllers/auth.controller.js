@@ -1,4 +1,4 @@
-// import jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import AuthUser from "../models/authUser.model.js";
 
@@ -34,4 +34,39 @@ const getAuthUsers = async (req, res) => {
     });
 };
 
-export {signUp, getAuthUsers};
+const login = async(req, res, next) => {
+    try {
+        const {email, password} = req.body;
+        const user = await AuthUser.findOne({email})
+
+        if(!user){
+            res.status(400).json({
+                message: "Invalid email or password",
+            })
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if(!isMatch){
+            return res.json({
+                message: "Invalid email or password",
+            })
+        }
+
+        const token = jwt.sign(
+            {userId: user._id},
+            process.env.JWT_SECRET,
+            {expiresIn: "1h"}
+        );
+
+        res.json({
+            message: "Login Successfull",
+            token,
+        })
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+export {signUp, getAuthUsers, login};
