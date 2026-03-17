@@ -6,8 +6,6 @@ import {
     updateUserById,
     delteUserById,
 } from "../controllers/users.controller.js";
-// import { signUp } from "../controllers/auth.controller.js";
-// import User from "../models/authUser.model.js";
 
 const userRoutes = express.Router();
 

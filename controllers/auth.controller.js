@@ -2,7 +2,7 @@
 import bcrypt from "bcrypt";
 import AuthUser from "../models/authUser.model.js";
 
-export const signUp = async (req, res, next) => {
+const signUp = async (req, res, next) => {
     try {
         console.log(req.body);
         const { name, email, password } = req.body;
@@ -33,3 +33,5 @@ const getAuthUsers = async (req, res) => {
         data: users,
     });
 };
+
+export {signUp, getAuthUsers};
