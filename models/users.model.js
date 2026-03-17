@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const dataSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
     {
         name: String,
         age: Number,
@@ -10,6 +10,6 @@ const dataSchema = new mongoose.Schema(
     }
 )
 
-const Data = mongoose.model("Data", dataSchema);
+const User = mongoose.model("User", userSchema);
 
-export default Data;
+export default User;

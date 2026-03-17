@@ -1,9 +1,9 @@
-import Data from "../models/data.model.js";
+import User from "../models/users.model.js";
 
 const createUser = async (req, res) => {
     try {
         // console.log(req.body)
-        const newUser = await Data.create(req.body);
+        const newUser = await User.create(req.body);
 
         res.json({
             message: "User created successfully",
@@ -20,7 +20,7 @@ const createUser = async (req, res) => {
 
 const readUsers = async (req, res) => {
     try {
-        const allUsers = await Data.find();
+        const allUsers = await User.find();
 
         res.json({
             message: "All user fetched successfully!!",
@@ -36,7 +36,7 @@ const readUsers = async (req, res) => {
 
 const readUserById = async (req, res) => {
     try {
-        const user = await Data.findById(req.params.id);
+        const user = await User.findById(req.params.id);
 
         res.json({
             message: "user data fetched successfully!!",
@@ -52,7 +52,7 @@ const readUserById = async (req, res) => {
 
 const updateUserById = async (req, res) => {
     try {
-        const updatedUser = await Data.findByIdAndUpdate(
+        const updatedUser = await User.findByIdAndUpdate(
             req.params.id,
             req.body,
             { returnDocument: "after", runValidators: true  },
@@ -72,8 +72,8 @@ const updateUserById = async (req, res) => {
 
 const delteUserById = async (req, res) => {
     try {
-        const deletedUser = await Data.findByIdAndDelete(req.params.id);
-
+        const deletedUser = await User.findByIdAndDelete(req.params.id);
+        
         res.json({
             message: "User deleted successfully!!",
             data: deletedUser,
