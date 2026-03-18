@@ -69,4 +69,21 @@ const login = async(req, res, next) => {
     }
 }
 
-export {signUp, getAuthUsers, login};
+const getProfile = async (req, res, next) => {
+    try{
+        console.log(req.user);
+        const authUserId = req.user.userId;
+
+        const authUser = await AuthUser.findById(authUserId).select("-password");
+
+        res.json({
+            message: "User profile fetched",
+            authUser,
+        })
+    }
+    catch(error){
+        next(error);
+    }
+}
+
+export {signUp, getAuthUsers, login, getProfile};
